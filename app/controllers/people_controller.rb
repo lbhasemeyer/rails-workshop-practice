@@ -21,4 +21,17 @@ class PeopleController < ApplicationController
     end
   end
 
+  def edit
+    @person = Person.find(params[:id])
+  end
+
+  def update
+    @person = Person.find(params[:id])
+    if @person.update(params.require(:person).permit(:first_name, :last_name, :title))
+      redirect_to people_path
+    else
+      render :edit
+    end
+  end
+
 end
